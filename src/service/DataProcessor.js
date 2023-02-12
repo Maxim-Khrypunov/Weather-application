@@ -41,7 +41,7 @@ export class DataProcessor {
             return console.log(weatherObject)};
         
     }
-    dataСhecking(startDate, endDate, hourFrom, hourTo) 
+    dataСhecking(startDate, hourFrom, hourTo) 
     {
         let controlResult = true;
         const controlStartDay = this.checkingStartDay(startDate)
@@ -49,16 +49,7 @@ export class DataProcessor {
         {
         if (hourFrom < 0 || hourFrom > 23) { console.log("Error.Start time value can be set from 0 to 23"); return controlResult = false; }
         else if (hourTo < 0 || hourTo > 23) {console.log("Error. End time value can be set from 0 to 23"); return controlResult = false;}
-        else if (this.maximumDurationOfForecast() < endDate) 
-        {console.log("Maximum weather forecast duration 16 days"); return controlResult = false; }
         return controlResult;}
-    }
-
-    maximumDurationOfForecast() 
-    {
-        const controlStartDate = new Date();
-        const maximumDuration = controlStartDate.setDate(controlStartDate.getDate() + 16);
-        return maximumDuration;
     }
 
     checkingStartDay(startDate) 
