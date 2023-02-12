@@ -24,10 +24,10 @@ export class DataProcessor {
     }
 
     async createWeatherObject(city, startDate, endDate, hourFrom, hourTo) {
-        const controlRes = this.dataСhecking(startDate, endDate, hourFrom, hourTo);
+        const controlRes = this.dataСhecking(startDate, hourFrom, hourTo);
         if (controlRes) {
             const dataFromServer = await this.getTemperatureData(city, startDate, endDate);
-            if(dataFromServer.error) {return console.log(dataFromServer);}
+            if(dataFromServer.error) {return console.log("Error.The end date is less than the start date or the forecast time is exceeded (Maximum forecast time is 16 days)");}
             const temperatures = dataFromServer.hourly.temperature_2m;
             const times = dataFromServer.hourly.time;
             const weatherObject = [];
