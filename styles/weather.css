@@ -1,0 +1,13 @@
+body
+{
+    background: url(/picture/pngtree-blue-sky-weather-background-picture-image_1229451.jpg);
+    background-repeat: no-repeat;
+    background-size: 120%; 
+}
+#header
+{
+    font-size: 250%;
+    justify-content: center; 
+    display: flex;
+    color: rgb(1, 1, 12);
+}
