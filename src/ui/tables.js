@@ -21,6 +21,7 @@ export class Table
 }
 addRow(object)
 {
+
 this.#tbodyElement.innerHTML += getRow(object, this.#schema);
 }
 }

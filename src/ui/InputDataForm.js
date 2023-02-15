@@ -1,6 +1,7 @@
+import { DataProcessor } from "../service/DataProcessor.js";
 import { weatherConfig } from "../service/weather-config.js";
 const maxDay = 16;
-
+const dateProcessor = new DataProcessor(weatherConfig.url)
 export class DataFormForInput
 {
     parentElementforinputCity;
@@ -90,20 +91,22 @@ export class DataFormForInput
     }
     addFormHandler() 
     {
-        const weatherObject = [];
-        const buttonSubmit = document.querySelector(".submit");
-        buttonSubmit.addEventListener("click",()=>
-        {
-            const dataFromClientCity = this.selectOfCity.value;
-            const dataFromClientStartDay = this.dateFromElement.value;
-            const dataFromClientFinishday = this.dateToElement.value;
-            const dataFromClientFromHour =+this.selectFromHours.value;
-            const dataFromClientToHour =+this.selectToHours.value;
-            weatherObject.push(dataFromClientCity,dataFromClientStartDay,dataFromClientFinishday,dataFromClientFromHour,dataFromClientToHour)
-        
-        })
-        return weatherObject;
+      
+       
+ 
+
     }
-    
+        getDataFromFrom() {
+        const weatherData = {};
+        weatherData.city = this.selectOfCity.value;
+        weatherData.startDay = this.dateFromElement.value;
+        weatherData.finishDay = this.dateToElement.value;
+        weatherData.fromHour = +this.selectFromHours.value;
+        weatherData.toHour = +this.selectToHours.value;
+
+        return weatherData;
+    }
+
+  
         
 }
