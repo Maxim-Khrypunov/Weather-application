@@ -1,7 +1,8 @@
 import { DataProcessor } from "../service/DataProcessor.js";
 import { weatherConfig } from "../service/weather-config.js";
+
 const maxDay = 16;
-const dateProcessor = new DataProcessor(weatherConfig.url)
+
 export class DataFormForInput
 {
     parentElementforinputCity;
@@ -31,14 +32,14 @@ export class DataFormForInput
     {
         this.parentElementforinputCity = document.querySelector(parentClassforInputCity);
         this.parentElementforinputCity.innerHTML=`
-        <div class="form-select-city"><label>Select city</label><select name="city" id="select-city" class="select-city"><option value="uuuu"></option></select></div>`;
+        <label id="sel-city">Select city</label><select name="city" id="select-city" class="select-city"><option value="uuuu"></option></select>`;
     }
 
     creatLinksForSelectCity()
     {
         this.selectOfCity = document.getElementById("select-city");
         this.selectOfCity.innerHTML = Object.keys(weatherConfig.cities).map(city =>
-        `<option value="${city}">${city}</option>`);
+        `<option  value="${city}">${city}</option>`);
     }
 
     createInputforHour(parentClassforInputforHour)
@@ -61,9 +62,9 @@ export class DataFormForInput
       createInputStartDayandFinishday(parentClassforInputStartDayandFinishday)
       {
         this.parentElementforinputDayandFinishday = document.querySelector(parentClassforInputStartDayandFinishday);
-        this.parentElementforinputDayandFinishday.innerHTML = `<form_id="data-form-id">
-        <div>Select start day</div><input type="date" id="date-from-id">
-        <div>Select finish day</div><input type="date" id="date-to-id"></form>`;
+        this.parentElementforinputDayandFinishday.innerHTML = `
+        <label id ="select_start_day">Select start day</label><input type="date" id="date-from-id">
+        <label id="select_finish_day">Select finish day</label><input type="date" id="date-to-id">`;
         
       }
       setMinMaxDates(maxDay)
@@ -87,16 +88,13 @@ export class DataFormForInput
         this.parentElementForInputButton = document.querySelector(parentClassforcreateButtons);
         this.parentElementForInputButton.innerHTML=
         `<button class = "submit" type="submit">Submit</button>
-        <button class = "reset" type="reset"> Reset </button>`;  
+         <button class = "reset" type="reset">Reset</button>
+         <button class ="updating-forecast-table" onclick ="window.location.reload()">Updating forecast table</button>`;  
     }
-    addFormHandler() 
-    {
-      
-       
- 
-
-    }
-        getDataFromFrom() {
+  
+        getDataForForm() {
+        let control = this.checkingDataInput()
+        if(control){
         const weatherData = {};
         weatherData.city = this.selectOfCity.value;
         weatherData.startDay = this.dateFromElement.value;
@@ -104,9 +102,18 @@ export class DataFormForInput
         weatherData.fromHour = +this.selectFromHours.value;
         weatherData.toHour = +this.selectToHours.value;
 
-        return weatherData;
+        return weatherData};
     }
-
+    
+        checkingDataInput()
+        {
+            const control = true;
+            if ( +this.selectToHours.value<+this.selectFromHours.value)
+            {alert("The end time is greater than the start time."); return false;}
+            else if (this.dateToElement.value<this.dateFromElement.value)
+            {alert("End date is greater than start date."); return false;}
+            return control;
+        }
   
         
 }

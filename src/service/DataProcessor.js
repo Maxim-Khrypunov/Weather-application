@@ -10,7 +10,7 @@ export class DataProcessor {
     async getData(latitude, longitude)
     {
         const responseFromServes =
-            await fetch(`${this.#url}&latitude=${latitude}&longitude=${longitude}`);
+        await fetch(`${this.#url}&latitude=${latitude}&longitude=${longitude}`);
         return responseFromServes.json();
     }
 
@@ -18,7 +18,7 @@ export class DataProcessor {
         const latitudeOfCity = weatherConfig.cities[city].latitude;
         const longitudeofCity = weatherConfig.cities[city].longitude;
         const responseFromServes =
-            await fetch(`${this.#url}&latitude=${latitudeOfCity}&longitude=${longitudeofCity}&start_date=${startDate}
+        await fetch(`${this.#url}&latitude=${latitudeOfCity}&longitude=${longitudeofCity}&start_date=${startDate}
 &end_date=${endDate}`);
         return responseFromServes.json();
     }
@@ -32,33 +32,33 @@ export class DataProcessor {
                 const time = new Date(element).getHours();
                 if (time >= hourFrom && time <= hourTo) {
                     const dateForArray = element.split("T")[0];
-                    weatherObject.push({ date: dateForArray, hour: time, temperature: temperatures[index] })
+                    weatherObject.push({ city, date: dateForArray, hour: time, temperature: temperatures[index] })
                 }
             });
             return weatherObject;
         
     }
-    dataСhecking(startDate, hourFrom, hourTo) 
-    {
-        let controlResult = true;
-        const controlStartDay = this.checkingStartDay(startDate)
-        if (controlStartDay)
-        {
-        if (hourFrom < 0 || hourFrom > 23) { console.log("Error.Start time value can be set from 0 to 23"); return controlResult = false; }
-        else if (hourTo < 0 || hourTo > 23) {console.log("Error. End time value can be set from 0 to 23"); return controlResult = false;}
-        return controlResult;}
-    }
+    // dataСhecking(startDate, hourFrom, hourTo) 
+    // {
+    //     let controlResult = true;
+    //     const controlStartDay = this.checkingStartDay(startDate)
+    //     if (controlStartDay)
+    //     {
+    //     if (hourFrom < 0 || hourFrom > 23) { console.log("Error.Start time value can be set from 0 to 23"); return controlResult = false; }
+    //     else if (hourTo < 0 || hourTo > 23) {console.log("Error. End time value can be set from 0 to 23"); return controlResult = false;}
+    //     return controlResult;}
+    // }
 
-    checkingStartDay(startDate) 
-    {
-        let controlResult = true;
-        const now = new Date();
-        const currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
-        const other = new Date(startDate);
-        const dataDate = new Date(other.getFullYear(), other.getMonth(), other.getDate()).valueOf();
-        if (currentDate > dataDate) { return console.log("Error! Invalid start date. Start date is less than current date"),controlResult = false; }
-        return controlResult;
-    }
+    // checkingStartDay(startDate) 
+    // {
+    //     let controlResult = true;
+    //     const now = new Date();
+    //     const currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
+    //     const other = new Date(startDate);
+    //     const dataDate = new Date(other.getFullYear(), other.getMonth(), other.getDate()).valueOf();
+    //     if (currentDate > dataDate) { return console.log("Error! Invalid start date. Start date is less than current date"),controlResult = false; }
+    //     return controlResult;
+    // }
 
 }
 

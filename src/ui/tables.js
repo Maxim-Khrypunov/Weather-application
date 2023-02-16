@@ -31,7 +31,7 @@ function getHeader(schema)
 }
 function getRow(data, schema)
 {
-return `<tr> ${getTds(data ,schema)}</tr>`;
+return `<tr id="string-data"> ${getTds(data ,schema)}</tr>`;
 }
 function getTds(data ,schema)
 {
